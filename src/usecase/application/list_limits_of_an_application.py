@@ -6,7 +6,7 @@ class ListLimitsOfAnApplication:
         application = self.application_repository.get_application(application_name)
         plan = application.get_plan()
         limits = {
-            "ApplicationName": application.get_app_name(),
+            "ApplicationName": application.get_name(),
             "Plan": plan.get_name(),
             "AllowedConcurrentBuilds": plan.get_number_of_allowed_concurrent_builds(),
             "BuildTimeLimitInMinutes": plan.get_build_time_limits_in_minutes(),

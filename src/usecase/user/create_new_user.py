@@ -13,4 +13,5 @@ class CreateNewUser:
             organization = self.organization_repository.get_organization(organization_name)
             if not self.user_repository.contains(user_name):
                 user = User(user_name, email, organization, False)
-                self.user_repository.add_user(user)
+                return self.user_repository.add_user(user)
+        return None

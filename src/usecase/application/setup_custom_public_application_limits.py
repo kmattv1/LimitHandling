@@ -10,6 +10,10 @@ class SetupCustomPublicApplicationLimits:
             application = self.application_repository.get_application(application_name)
 
             if application.get_is_public():
-                migration_application = Application(application.name, application.owner_organization, True, exceptional_plan)
-                self.application_repository.add_application(migration_application)
-                self.application_repository.remove_application(application)
+                self.application_repository.update_application_properties(application.get_name(),
+                                                                          application.get_owner_organization(),
+                                                                          True,
+                                                                          exceptional_plan)
+                return self.application_repository.get_application(
+                    application_name).get_plan().get_name() == exceptional_plan.get_name()
+            return None

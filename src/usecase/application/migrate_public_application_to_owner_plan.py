@@ -13,3 +13,5 @@ class MigratePublicApplicationToOwnerPlan:
                                                                       application.owner_organization,
                                                                       False,
                                                                       None)
+            return self.application_repository.get_application(application_name).get_is_public() is False
+        return None

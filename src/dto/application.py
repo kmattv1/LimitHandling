@@ -13,13 +13,13 @@ class Application:
         self.is_public = is_public
 
         if exceptional_plan:
-            self.exceptional_plan = exceptional_plan
-            self.build_handler = BuildHandler(exceptional_plan)
+            self.exceptional_plan = exceptional_plan[0]
+            self.build_handler = BuildHandler(exceptional_plan[0])
         else:
             self.exceptional_plan = None
             self.build_handler = owner_organization.get_build_handler()
 
-    def get_app_name(self):
+    def get_name(self):
         return self.name
 
     def get_owner_organization(self):
@@ -35,7 +35,7 @@ class Application:
             else:
                 return Public()
         else:
-            self.owner_organization.get_plan()
+            return self.owner_organization.get_plan()
 
     def get_build_handler(self):
         return self.build_handler
