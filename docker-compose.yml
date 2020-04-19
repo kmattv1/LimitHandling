@@ -1,0 +1,7 @@
+version: '3.7'
+services:
+  web:
+    container_name: limit_handling_api
+    build: .
+    ports:
+      - "5000:8888"
