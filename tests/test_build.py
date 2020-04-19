@@ -24,7 +24,7 @@ class TestBuild(TestCase):
         # Then
         assert status == BuildStatus.SUCCESSFUL
 
-    def test_when_app_name_is_defined_then_it_is_succesfully_set(self):
+    def test_when_app_name_is_defined_then_it_is_successfully_set(self):
         # When
         build = Build("test")
 
