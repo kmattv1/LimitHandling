@@ -22,7 +22,8 @@ class BuildHandler:
 
     def __start_build(self, build):
         self.active_builds.append(build.app_name)
-        loop = asyncio.get_event_loop()
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
         try:
             status = loop.run_until_complete(build.run())
         except Exception as e:

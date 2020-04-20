@@ -1,16 +1,18 @@
+from src.dto.application_limits import ApplicationLimits
+from src.usecase.http_messages import errors
+
+
 class ListLimitsOfAnApplication:
     def __init__(self, application_repository):
         self.application_repository = application_repository
 
     def get_limits(self, application_name):
         application = self.application_repository.get_application(application_name)
-        plan = application.get_plan()
-        limits = {
-            "ApplicationName": application.get_name(),
-            "Plan": plan.get_name(),
-            "AllowedConcurrentBuilds": plan.get_number_of_allowed_concurrent_builds(),
-            "BuildTimeLimitInMinutes": plan.get_build_time_limits_in_minutes(),
-            "MaximumBuildsPerMonth": plan.get_number_of_maximum_builds_pre_month(),
-            "IsPublic": application.get_is_public()
-        }
-        return limits
+        if application:
+            plan = application.get_plan()
+            if plan:
+                return ApplicationLimits.get_limits_dict(application, plan)
+            else:
+                raise errors.get_not_found_error("No plan defined for the selected application!")
+        else:
+            raise errors.get_not_found_error("Specified application: " + str(application_name) + " does not exist!")

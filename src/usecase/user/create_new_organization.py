@@ -1,4 +1,7 @@
+import logging
+
 from src.usecase.build_application.build_handler import BuildHandler
+from src.usecase.http_messages import errors
 
 
 class CreateNewOrganization:
@@ -8,10 +11,18 @@ class CreateNewOrganization:
         self.organization_repository = organization_repository
         self.plan_repository = plan_repository
 
-    def create_new_organization(self, organization_name, plan_id):
+    def create_new_organization(self, organization_name, plan_name):
         if not self.organization_repository.contains(organization_name):
+            plan_id = self.plan_repository.get_plan_id_for_name(plan_name)
             if self.plan_repository.contains(plan_id):
-                plan = self.plan_repository.get_plan(plan_id)
-                build_handler = BuildHandler(plan)
-                return self.organization_repository.add_organization(organization_name, plan, build_handler)
-        return None
+                try:
+                    plan = self.plan_repository.get_plan(plan_id)
+                    build_handler = BuildHandler(plan)
+                    return self.organization_repository.add_organization(organization_name, plan, build_handler)
+                except Exception as e:
+                    logging.error(e)
+                    raise errors.get_internal_server_error("Failed to create organization due to server error!")
+            else:
+                raise errors.get_bad_request_error("There is no plan that matches with the specified one!")
+        else:
+            raise errors.get_bad_request_error("There is already an existing organization with this name!")

@@ -26,5 +26,5 @@ class TestCreateNewApplication(TestCase):
         result = create_new_app_use_case.create_application("test", False, "test_user")
 
         # Then
-        assert result is True
+        assert result.name is "test"
         assert len(self.application_repository.application_storage.keys()) is 1

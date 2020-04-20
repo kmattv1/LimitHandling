@@ -20,7 +20,7 @@ class TestListLimitsOfAnApplication(TestCase):
         # Given
         self.application_repository.add_application(Application("test_app", self.organization, False))
         assert len(self.application_repository.application_storage.keys()) is 1
-        list_app_limits= ListLimitsOfAnApplication(self.application_repository)
+        list_app_limits = ListLimitsOfAnApplication(self.application_repository)
 
         # When
         result = list_app_limits.get_limits("test_app")

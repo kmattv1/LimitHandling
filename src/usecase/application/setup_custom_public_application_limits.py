@@ -1,4 +1,4 @@
-from src.dto.application import Application
+from src.usecase.http_messages import errors
 
 
 class SetupCustomPublicApplicationLimits:
@@ -6,6 +6,7 @@ class SetupCustomPublicApplicationLimits:
         self.application_repository = application_repository
 
     def set_custom_application_limits(self, application_name, exceptional_plan):
+
         if self.application_repository.contains(application_name):
             application = self.application_repository.get_application(application_name)
 
@@ -14,6 +15,8 @@ class SetupCustomPublicApplicationLimits:
                                                                           application.get_owner_organization(),
                                                                           True,
                                                                           exceptional_plan)
-                return self.application_repository.get_application(
-                    application_name).get_plan().get_name() == exceptional_plan.get_name()
-            return None
+                return self.application_repository.get_application(application_name)
+            else:
+                raise errors.get_bad_request_error("Selected application is not a public application!")
+        else:
+            raise errors.get_not_found_error("Specified application: " + str(application_name) + " does not exist!")

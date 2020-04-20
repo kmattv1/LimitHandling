@@ -1,5 +1,4 @@
 from src.dto.application import Application
-from src.dto.plan import Plan
 
 
 class ApplicationRepository:
@@ -18,7 +17,7 @@ class ApplicationRepository:
             application_name: application
         }
         self.application_storage.update(application_object)
-        return application_name in self.application_storage.keys()
+        return self.application_storage.get(application_name)
 
     def remove_application(self, application_name):
         if application_name in self.application_storage.keys():

@@ -1,3 +1,4 @@
 asyncio
-tornado
 dependency-injector
+tornado
+tornado-swagger

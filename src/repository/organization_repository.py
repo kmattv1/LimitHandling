@@ -18,3 +18,11 @@ class OrganizationRepository:
         }
         self.organization_storage.update(organization_object)
         return organization_name in self.organization_storage.keys()
+
+    def add_organization(self, organization):
+        organization_name = organization.get_name()
+        organization_object = {
+            organization_name: organization
+        }
+        self.organization_storage.update(organization_object)
+        return organization_name in self.organization_storage.keys()

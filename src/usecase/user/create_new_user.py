@@ -1,4 +1,5 @@
 from src.dto.user import User
+from src.usecase.http_messages import errors
 
 
 class CreateNewUser:
@@ -14,4 +15,7 @@ class CreateNewUser:
             if not self.user_repository.contains(user_name):
                 user = User(user_name, email, organization, False)
                 return self.user_repository.add_user(user)
-        return None
+            else:
+                raise errors.get_bad_request_error("There is a registered user with the same username!")
+        else:
+            raise errors.get_bad_request_error("Specified organization does not exits!")

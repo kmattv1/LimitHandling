@@ -1,4 +1,32 @@
+from tornado_swagger.model import register_swagger_model
+
+
+@register_swagger_model
 class Plan:
+    """
+    ---
+    type: object
+    description: App plan representation
+    properties:
+        planName:
+            type: string
+        allowedConcurrentBuilds:
+            type: integer
+            format: int64
+        buildTimeLimitInMinutes:
+            type: integer
+            format: int64
+        maximumBuildsPerMonth:
+            type: integer
+            format: int64
+        maximumNumberOfTeamMembers:
+            type: integer
+            format: int64
+        maximumNumberOfApps:
+            type: integer
+            format: int64
+    """
+
     def __init__(self,
                  name,
                  allowed_concurrent_builds,
@@ -30,6 +58,16 @@ class Plan:
 
     def get_number_of_allowed_apps_in_the_plan(self):
         return self.maximum_number_of_apps
+
+    def get_as_dict(self):
+        return {
+            "planName": self.get_name(),
+            "allowedConcurrentBuilds": int(self.get_number_of_allowed_concurrent_builds()),
+            "buildTimeLimitInMinutes": int(self.get_build_time_limits_in_minutes()),
+            "maximumBuildsPerMonth": int(self.get_number_of_maximum_builds_pre_month()),
+            "maximumNumberOfTeamMembers": int(self.get_number_of_maximum_team_members()),
+            "maximumNumberOfApps": int(self.get_number_of_allowed_apps_in_the_plan())
+        }
 
 
 class Free(Plan):
