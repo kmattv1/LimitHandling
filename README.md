@@ -5,7 +5,7 @@
   <a href="https://limit-handling.herokuapp.com/">
     <img alt="badge: Service running in production" src="https://img.shields.io/badge/PROD-service-orange" />
   </a>
-  <a href="https://kmattv1.github.io/LimitHandling/docs/">
+  <a href="https://kmattv1.github.io/LimitHandling/">
     <img alt="badge: Test coverage 71%" src="https://img.shields.io/badge/Test%20coverage-71%25-blue" />
   </a>
 </p>
