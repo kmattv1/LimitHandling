@@ -4,11 +4,12 @@ import tornado.web
 
 from src.web_application import WebApplication
 
+define("port", default=8888, help="run on the given port", type=int)
+
 if __name__ == "__main__":
-    tornado.options.define('port', default='8888', help='Port to listen on')
     tornado.options.parse_command_line()
 
-    app = WebApplication()
-    app.listen(port=8888)
+    http_server = tornado.httpserver.HTTPServer(WebApplication(), decompress_request=True)
+    http_server.listen(tornado.options.options.port)
 
-    tornado.ioloop.IOLoop.current().start()
+    tornado.ioloop.IOLoop.instance().start()
