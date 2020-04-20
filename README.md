@@ -5,6 +5,9 @@
   <a href="https://limit-handling.herokuapp.com/">
     <img alt="badge: Service running in production" src="https://img.shields.io/badge/PROD-service-orange" />
   </a>
+  <a href="https://github.com/kmattv1/LimitHandling/tree/master/test_coverage/index.html">
+    <img alt="badge: Test coverage 71%" src="https://img.shields.io/badge/Test coverage-71%-blue" />
+  </a>
 </p>
 
 # Limit handling service based on subscription packages

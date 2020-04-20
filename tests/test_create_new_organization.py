@@ -17,7 +17,7 @@ class TestCreateNewOrganization(TestCase):
         create_new_organization_use_case = CreateNewOrganization(self.organization_repository, self.plan_repository)
 
         # When
-        result = create_new_organization_use_case.create_new_organization("test_org", PlansEnum.PUB)
+        result = create_new_organization_use_case.create_new_organization("test_org", "pub")
 
         # Then
         assert result is True

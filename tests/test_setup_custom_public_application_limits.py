@@ -30,6 +30,6 @@ class TestSetupCustomPublicApplicationLimits(TestCase):
         result = custom_app_plan_use_case.set_custom_application_limits("test_app", custom_plan)
 
         # Then
-        assert result is True
+        assert result.get_name() is "test_app"
         assert self.application_repository.application_storage.get("test_app").get_is_public() is True
         assert self.application_repository.application_storage.get("test_app").get_plan().get_name() is "Custom"

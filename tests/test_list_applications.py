@@ -5,10 +5,10 @@ from src.dto.application import Application
 from src.dto.organization import Organization
 from src.repository.application_repository import ApplicationRepository
 from src.repository.user_repository import UserRepository
-from src.usecase.application.list_limits_of_an_application import ListLimitsOfAnApplication
+from src.usecase.application.list_application_use_case import ListApplications
 
 
-class TestListLimitsOfAnApplication(TestCase):
+class TestListApplications(TestCase):
 
     def setUp(self):
         self.application_repository = ApplicationRepository()
@@ -16,16 +16,15 @@ class TestListLimitsOfAnApplication(TestCase):
         free_plan = plan.Free()
         self.organization = Organization("test_org", free_plan, None)
 
-    def test_given_repository_with_app_when_listing_application_limits_then_response_matches(self):
+    def test_given_repository_with_app_when_listing_applications_then_one_app_is_listed(self):
         # Given
         self.application_repository.add_application(Application("test_app", self.organization, False))
         assert len(self.application_repository.application_storage.keys()) is 1
-        list_app_limits = ListLimitsOfAnApplication(self.application_repository)
+        list_apps = ListApplications(self.application_repository)
 
         # When
-        result = list_app_limits.get_limits("test_app")
+        result = list_apps.get_app_names()
 
         # Then
-        assert result.get("applicationName") is "test_app"
-        assert result.get("plan") is "Free"
-        assert result.get("isPublic") is False
+        assert len(result) is 1
+        assert list(result)[0] is "test_app"

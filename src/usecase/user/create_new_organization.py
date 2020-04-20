@@ -1,5 +1,6 @@
 import logging
 
+from src.dto.organization import Organization
 from src.usecase.build_application.build_handler import BuildHandler
 from src.usecase.http_messages import errors
 
@@ -18,7 +19,8 @@ class CreateNewOrganization:
                 try:
                     plan = self.plan_repository.get_plan(plan_id)
                     build_handler = BuildHandler(plan)
-                    return self.organization_repository.add_organization(organization_name, plan, build_handler)
+                    organization = Organization(organization_name, plan, build_handler)
+                    return self.organization_repository.add_organization(organization)
                 except Exception as e:
                     logging.error(e)
                     raise errors.get_internal_server_error("Failed to create organization due to server error!")
