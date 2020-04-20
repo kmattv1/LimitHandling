@@ -6,7 +6,8 @@ from src.dto import plan
 from src.dto.application import Application
 from src.dto.organization import Organization
 from src.dto.user import User
-from src.resource.app_resource import AppResource
+from src.resource.app_limit_resource import AppLimitResource
+from src.resource.apps_resource import AppsResource
 from src.resource.migration_resource import MigrationResource
 from src.resource.organization_resource import OrganizationResource
 from src.resource.root_resource import RootResource
@@ -17,12 +18,12 @@ from src.usecase.build_application.build_handler import BuildHandler
 class WebApplication(tornado.web.Application):
     _routes = [
         tornado.web.url(r'/', RootResource),
-        tornado.web.url(r'/api/app', AppResource, dict(
+        tornado.web.url(r'/api/apps', AppsResource, dict(
             application_repository=provider.Repositories.application_repository(),
             user_repository=provider.Repositories.user_repository())),
         tornado.web.url(r'/api/app/migrate/(.*)', MigrationResource, dict(
             application_repository=provider.Repositories.application_repository())),
-        tornado.web.url(r'/api/app/(.*)', AppResource, dict(
+        tornado.web.url(r'/api/app/limit/(.*)', AppLimitResource, dict(
             application_repository=provider.Repositories.application_repository(),
             user_repository=provider.Repositories.user_repository())),
         tornado.web.url(r'/api/org', OrganizationResource, dict(

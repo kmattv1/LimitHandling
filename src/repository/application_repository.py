@@ -5,6 +5,9 @@ class ApplicationRepository:
     def __init__(self):
         self.application_storage = {}
 
+    def get_applications(self):
+        return self.application_storage.keys()
+
     def get_application(self, application_name):
         return self.application_storage.get(application_name)
 
