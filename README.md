@@ -1,4 +1,4 @@
-<p align="center">
+<p align="left">
   <a href="https://limit-handling.herokuapp.com/doc">
     <img alt="badge: API documentation" src="https://img.shields.io/badge/API-documentation-brightgreen" />
   </a>
@@ -6,7 +6,7 @@
     <img alt="badge: Service running in production" src="https://img.shields.io/badge/PROD-service-orange" />
   </a>
   <a href="https://kmattv1.github.io/LimitHandling/">
-    <img alt="badge: Test coverage 71%" src="https://img.shields.io/badge/Test%20coverage-71%25-blue" />
+    <img alt="badge: Test coverage 91%" src="https://img.shields.io/badge/Test%20coverage-91%25-blue" />
   </a>
 </p>
 
@@ -18,3 +18,12 @@ Setup of the containers is managed in the docker compose file.
 
 ### Containers:
 * Microservice writen in python
+
+### Test coverage
+
+```bash
+coverage run -m unittest discover
+coverage report
+covaerage html
+coverage xml
+```
