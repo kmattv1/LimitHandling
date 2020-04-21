@@ -13,9 +13,9 @@ class UserResource(tornado.web.RequestHandler):
 
     def initialize(self,
                    organization_repository,
-                   plan_repository):
+                   user_repository):
         self.organization_repository = organization_repository
-        self.plan_repository = plan_repository
+        self.user_repository = user_repository
 
     def post(self):
         """
@@ -57,7 +57,7 @@ class UserResource(tornado.web.RequestHandler):
             email = str(body.email)
             organization_name = str(body.organizationName)
 
-            create_new_user_use_case = CreateNewUser(self.organization_repository, self.plan_repository)
+            create_new_user_use_case = CreateNewUser(self.organization_repository, self.user_repository)
             user_created = create_new_user_use_case.create_new_user(user_name, email, organization_name)
             if user_created:
                 self.write("Successfully created new user named: " + str(user_name))

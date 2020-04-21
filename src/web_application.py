@@ -27,11 +27,11 @@ class WebApplication(tornado.web.Application):
             application_repository=provider.Repositories.application_repository(),
             user_repository=provider.Repositories.user_repository())),
         tornado.web.url(r'/api/org', OrganizationResource, dict(
-            application_repository=provider.Repositories.organization_repository(),
-            user_repository=provider.Repositories.plan_repository())),
+            organization_repository=provider.Repositories.organization_repository(),
+            plan_repository=provider.Repositories.plan_repository())),
         tornado.web.url(r'/api/user', UserResource, dict(
-            application_repository=provider.Repositories.organization_repository(),
-            user_repository=provider.Repositories.plan_repository())),
+            organization_repository=provider.Repositories.organization_repository(),
+            user_repository=provider.Repositories.user_repository())),
     ]
 
     @staticmethod
