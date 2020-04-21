@@ -41,7 +41,7 @@ curl -X POST -H "Content-Type: application/json" -d '{"orgName": "exampleOrg", "
 
 curl -X POST -H "Content-Type: application/json" -d '{"userName": "exampleUser", "email": "example@mail.com", "organizationName": "exampleOrg"}' https://limit-handling.herokuapp.com/api/user
 
-curl -X POST -H "Content-Type: application/json" -d '{"appName": "examplePublicApp", "isPublic": "true"}' https://limit-handling.herokuapp.com/api/apps
+curl -X POST -H "user_name: testUser" -H "Content-Type: application/json" -d '{"appName": "examplePublicApp", "isPublic": "true"}' https://limit-handling.herokuapp.com/api/apps
 
 curl -X PUT -H "Content-Type: application/json" -H "user_name: testUser" -d '{"plan": {"PlanName": "Exceptional1", "AllowedConcurrentBuilds": "100", "BuildTimeLimitInMinutes": "1", "MaximumBuildsPerMonth": "2", "MaximumNumberOfTeamMembers": "20", "MaximumNumberOfApps": "1"}}' https://limit-handling.herokuapp.com/api/app/limit/examplePublicApp
 
