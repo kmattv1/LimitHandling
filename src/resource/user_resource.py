@@ -23,8 +23,8 @@ class UserResource(tornado.web.RequestHandler):
         ---
         tags:
         - Example
-        summary: Create a new organization
-        description: This resource will create a new organization.
+        summary: Create a new User
+        description: This resource will create a new user.
         operationId: api.org
         produces:
         - application/json
